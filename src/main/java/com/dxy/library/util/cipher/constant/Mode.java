@@ -30,7 +30,10 @@ public enum Mode {
     OFB("OFB"),
 
     //计数器模式，增加一个序列函数对所有密文快做XOR
-    CTR("CTR");
+    CTR("CTR"),
+
+    //伽罗瓦/计数器模式，CTR模式的扩展，提供认证加密功能
+    GCM("GCM");
 
     String mode;
 
