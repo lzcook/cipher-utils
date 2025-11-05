@@ -7,7 +7,6 @@ import com.lzc.lib.util.cipher.constant.RSASignType;
 import com.lzc.lib.util.cipher.exception.CipherException;
 import com.lzc.lib.util.cipher.pojo.RSAKeyPair;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.BadPaddingException;
@@ -158,10 +157,10 @@ public class RSAUtils {
      * @return 密文（Base64编码）
      */
     public static String encryptByPublicKeyOAEPSHA256(String data, String publicKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
-        return Base64.encodeBase64String(encryptByPublicKeyOAEPSHA256(data.getBytes(), publicKey.getBytes()));
+        return Base64.encodeBase64String(encryptByPublicKeyOAEPSHA256(data.getBytes(), Base64.decodeBase64(publicKey)));
     }
 
     /**
@@ -186,10 +185,10 @@ public class RSAUtils {
      * @return 密文（Base64编码）
      */
     public static String encryptByPublicKeyOAEPSHA384(String data, String publicKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
-        return Base64.encodeBase64String(encryptByPublicKeyOAEPSHA384(data.getBytes(), publicKey.getBytes()));
+        return Base64.encodeBase64String(encryptByPublicKeyOAEPSHA384(data.getBytes(), Base64.decodeBase64(publicKey)));
     }
 
     /**
@@ -213,10 +212,10 @@ public class RSAUtils {
      * @return 密文（Base64编码）
      */
     public static String encryptByPublicKeyOAEPSHA512(String data, String publicKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
-        return Base64.encodeBase64String(encryptByPublicKeyOAEPSHA512(data.getBytes(), publicKey.getBytes()));
+        return Base64.encodeBase64String(encryptByPublicKeyOAEPSHA512(data.getBytes(), Base64.decodeBase64(publicKey)));
     }
 
     /**
@@ -410,10 +409,10 @@ public class RSAUtils {
      * @return 密文（Base64编码）
      */
     public static String encryptByPrivateKeyOAEPSHA256(String data, String privateKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
-        return Base64.encodeBase64String(encryptByPrivateKeyOAEPSHA256(data.getBytes(), privateKey.getBytes()));
+        return Base64.encodeBase64String(encryptByPrivateKeyOAEPSHA256(data.getBytes(), Base64.decodeBase64(privateKey)));
     }
 
     /**
@@ -439,10 +438,10 @@ public class RSAUtils {
      * @return 密文（Base64编码）
      */
     public static String encryptByPrivateKeyOAEPSHA384(String data, String privateKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
-        return Base64.encodeBase64String(encryptByPrivateKeyOAEPSHA384(data.getBytes(), privateKey.getBytes()));
+        return Base64.encodeBase64String(encryptByPrivateKeyOAEPSHA384(data.getBytes(), Base64.decodeBase64(privateKey)));
     }
 
     /**
@@ -468,10 +467,10 @@ public class RSAUtils {
      * @return 密文（Base64编码）
      */
     public static String encryptByPrivateKeyOAEPSHA512(String data, String privateKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
-        return Base64.encodeBase64String(encryptByPrivateKeyOAEPSHA512(data.getBytes(), privateKey.getBytes()));
+        return Base64.encodeBase64String(encryptByPrivateKeyOAEPSHA512(data.getBytes(), Base64.decodeBase64(privateKey)));
     }
 
     /**
@@ -514,7 +513,7 @@ public class RSAUtils {
      * @return 密文（Base64编码）
      */
     public static String encrypt(String data, RSAKey rsaKey, Mode mode, Padding padding) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         return Base64.encodeBase64String(encrypt(data.getBytes(), rsaKey, mode, padding));
@@ -662,7 +661,7 @@ public class RSAUtils {
      * @return 明文
      */
     public static String decryptByPublicKeyOAEPSHA256(String data, String publicKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         byte[] decrypt = decryptByPublicKeyOAEPSHA256(Base64.decodeBase64(data.getBytes()), publicKey);
@@ -692,7 +691,7 @@ public class RSAUtils {
      * @return 明文
      */
     public static String decryptByPublicKeyOAEPSHA384(String data, String publicKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         byte[] decrypt = decryptByPublicKeyOAEPSHA384(Base64.decodeBase64(data.getBytes()), publicKey);
@@ -722,7 +721,7 @@ public class RSAUtils {
      * @return 明文
      */
     public static String decryptByPublicKeyOAEPSHA512(String data, String publicKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         byte[] decrypt = decryptByPublicKeyOAEPSHA512(Base64.decodeBase64(data.getBytes()), publicKey);
@@ -884,7 +883,7 @@ public class RSAUtils {
      * @return 明文
      */
     public static String decryptByPrivateKeyOAEPSHA256(String data, String privateKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         byte[] decrypt = decryptByPrivateKeyOAEPSHA256(Base64.decodeBase64(data.getBytes()), privateKey);
@@ -912,7 +911,7 @@ public class RSAUtils {
      * @return 明文
      */
     public static String decryptByPrivateKeyOAEPSHA384(String data, String privateKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         byte[] decrypt = decryptByPrivateKeyOAEPSHA384(Base64.decodeBase64(data.getBytes()), privateKey);
@@ -940,7 +939,7 @@ public class RSAUtils {
      * @return 明文
      */
     public static String decryptByPrivateKeyOAEPSHA512(String data, String privateKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         byte[] decrypt = decryptByPrivateKeyOAEPSHA512(Base64.decodeBase64(data.getBytes()), privateKey);
@@ -1011,7 +1010,7 @@ public class RSAUtils {
      * @return 明文
      */
     public static String decrypt(String data, RSAKey rsaKey, Mode mode, Padding padding) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         byte[] decrypt = decrypt(Base64.decodeBase64(data.getBytes()), rsaKey, mode, padding);
@@ -1163,7 +1162,7 @@ public class RSAUtils {
      * @return 公钥（X509格式）
      */
     public static RSAPublicKey getPublicKey(String publicKey) {
-        return getPublicKey(Base64.decodeBase64(publicKey.getBytes()));
+        return getPublicKey(Base64.decodeBase64(publicKey));
     }
 
     /**
@@ -1187,7 +1186,7 @@ public class RSAUtils {
      * @return 私钥（PKCS8格式）
      */
     public static RSAPrivateKey getPrivateKey(String privateKey) {
-        return getPrivateKey(Base64.decodeBase64(privateKey.getBytes()));
+        return getPrivateKey(Base64.decodeBase64(privateKey));
     }
 
     /**

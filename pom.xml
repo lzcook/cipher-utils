@@ -22,30 +22,7 @@
         </repository>
     </distributionManagement>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
 
-    <name>Common Utils</name>
-    <url>https://github.com/duanxinyuan/common-utils</url>
-    <description>工具类集合</description>
-
-    <scm>
-        <connection>scm:git:https://github.com/duanxinyuan/common-utils.git</connection>
-        <developerConnection>scm:git:https://github.com/duanxinyuan/common-utils.git</developerConnection>
-        <url>https://github.com/duanxinyuan/common-utils</url>
-    </scm>
-
-    <developers>
-        <developer>
-            <name>duanxinyuan</name>
-            <email>919317632@qq.com</email>
-            <url>https://github.com/duanxinyuan</url>
-        </developer>
-    </developers>
 
     <properties>
         <cipher-utils.version>1.0.0</cipher-utils.version>
@@ -63,7 +40,8 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-codec.version>1.13</commons-codec.version>
 
-        <bcprov.version>1.67</bcprov.version>
+        <bcprov.version>1.78</bcprov.version>
+        <bcpkix.version>1.79</bcpkix.version>
 
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-scala-plugin.version>2.15.2</maven-scala-plugin.version>
@@ -76,11 +54,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -114,16 +87,12 @@
             <artifactId>commons-codec</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
+            <artifactId>bcpkix-jdk18on</artifactId>
         </dependency>
     </dependencies>
 
@@ -145,13 +114,13 @@
             <!--加解密支持-->
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcprov-jdk15on</artifactId>
+                <artifactId>bcprov-jdk18on</artifactId>
                 <version>${bcprov.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcpkix-jdk15on</artifactId>
-                <version>${bcprov.version}</version>
+                <artifactId>bcpkix-jdk18on</artifactId>
+                <version>${bcpkix.version}</version>
             </dependency>
 
         </dependencies>

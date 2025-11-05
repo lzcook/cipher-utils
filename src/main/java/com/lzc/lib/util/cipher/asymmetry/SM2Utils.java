@@ -6,7 +6,6 @@ import com.lzc.lib.util.cipher.exception.CipherException;
 import com.lzc.lib.util.cipher.pojo.SM2KeyPair;
 import com.lzc.lib.util.cipher.utils.KeyEncodedUtils;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
@@ -61,7 +60,7 @@ public class SM2Utils {
      * @return 密文（Base64编码）
      */
     public static String encrypt(String data, ECPublicKey ecPublicKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         return Base64.encodeBase64String(encrypt(data.getBytes(), ecPublicKey));
@@ -110,7 +109,7 @@ public class SM2Utils {
      * @return 明文
      */
     public static String decrypt(String data, ECPrivateKey ecPrivateKey) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         byte[] decrypt = decrypt(Base64.decodeBase64(data.getBytes()), ecPrivateKey);

@@ -44,9 +44,11 @@ public class RandomUtilTest {
         int[] lengths = {1, 8, 12, 16, 32, 64};
         for (int length : lengths) {
             String randomString = RandomUtil.generateRandomString(length);
-            System.out.println("生成 " + length + " 字节的随机字符串");
+            System.out.println("生成 " + length + " 字节的随机字符串: " + randomString);
             Assert.assertNotNull("随机字符串不应该为 null", randomString);
-            Assert.assertEquals("随机字符串长度应该是 " + length, length, randomString.length());
+            // Base64编码：每3个字节变成4个字符
+            int expectedLength = (length + 2) / 3 * 4; // Base64 编码后的长度
+            Assert.assertEquals("随机字符串长度应该是 " + expectedLength, expectedLength, randomString.length());
         }
 
         System.out.println("✓ 生成随机字符串测试通过\n");

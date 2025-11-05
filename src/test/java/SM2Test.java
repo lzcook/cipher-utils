@@ -2,7 +2,7 @@ import com.lzc.lib.util.cipher.asymmetry.SM2Utils;
 import com.lzc.lib.util.cipher.constant.SM2SignType;
 import com.lzc.lib.util.cipher.pojo.SM2KeyPair;
 import org.apache.commons.codec.binary.Base64;
-import org.bouncycastle.pqc.math.linearalgebra.ByteUtils;
+import org.bouncycastle.pqc.legacy.math.linearalgebra.ByteUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

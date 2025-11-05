@@ -1,4 +1,6 @@
 import com.lzc.lib.util.cipher.asymmetry.RSAUtils;
+import com.lzc.lib.util.cipher.constant.Mode;
+import com.lzc.lib.util.cipher.constant.Padding;
 import com.lzc.lib.util.cipher.pojo.RSAKeyPair;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Assert;
@@ -117,10 +119,14 @@ public class RSATest {
         RSAPublicKey importedKey = RSAUtils.importPublicKeyFromDER(derBytes);
         Assert.assertNotNull("导入的公钥不应为空", importedKey);
 
-        // 验证导入的密钥可以正常使用
-        String encrypted = RSAUtils.encryptByPublicKey(testData, Base64.encodeBase64String(importedKey.getEncoded()));
+        // 验证导入的密钥可以正常使用（直接使用原始公钥字符串）
+        String encrypted = RSAUtils.encryptByPublicKey(testData, publicKeyBase64);
         String decrypted = RSAUtils.decryptByPrivateKey(encrypted, privateKeyBase64);
         Assert.assertEquals("加解密后应该与原文一致", testData, decrypted);
+
+        // 验证导入的密钥与原始密钥的编码一致
+        Assert.assertArrayEquals("导入的公钥编码应该与原始公钥编码一致",
+            Base64.decodeBase64(publicKeyBase64), importedKey.getEncoded());
 
         System.out.println("原文: " + testData);
         System.out.println("解密: " + decrypted);
@@ -141,10 +147,14 @@ public class RSATest {
         RSAPrivateKey importedKey = RSAUtils.importPrivateKeyFromDER(derBytes);
         Assert.assertNotNull("导入的私钥不应为空", importedKey);
 
-        // 验证导入的密钥可以正常使用
+        // 验证导入的密钥可以正常使用（直接使用原始私钥字符串）
         String encrypted = RSAUtils.encryptByPublicKey(testData, publicKeyBase64);
-        String decrypted = RSAUtils.decryptByPrivateKey(encrypted, Base64.encodeBase64String(importedKey.getEncoded()));
+        String decrypted = RSAUtils.decryptByPrivateKey(encrypted, privateKeyBase64);
         Assert.assertEquals("加解密后应该与原文一致", testData, decrypted);
+
+        // 验证导入的密钥与原始密钥的编码一致
+        Assert.assertArrayEquals("导入的私钥编码应该与原始私钥编码一致",
+            Base64.decodeBase64(privateKeyBase64), importedKey.getEncoded());
 
         System.out.println("原文: " + testData);
         System.out.println("解密: " + decrypted);
@@ -165,10 +175,14 @@ public class RSATest {
         RSAPublicKey importedKey = RSAUtils.importPublicKeyFromPEM(pemString);
         Assert.assertNotNull("导入的公钥不应为空", importedKey);
 
-        // 验证导入的密钥可以正常使用
-        String encrypted = RSAUtils.encryptByPublicKey(testData, Base64.encodeBase64String(importedKey.getEncoded()));
+        // 验证导入的密钥可以正常使用（直接使用原始公钥字符串）
+        String encrypted = RSAUtils.encryptByPublicKey(testData, publicKeyBase64);
         String decrypted = RSAUtils.decryptByPrivateKey(encrypted, privateKeyBase64);
         Assert.assertEquals("加解密后应该与原文一致", testData, decrypted);
+
+        // 验证导入的密钥与原始密钥的编码一致
+        Assert.assertArrayEquals("导入的公钥编码应该与原始公钥编码一致",
+            Base64.decodeBase64(publicKeyBase64), importedKey.getEncoded());
 
         System.out.println("原文: " + testData);
         System.out.println("解密: " + decrypted);
@@ -189,10 +203,14 @@ public class RSATest {
         RSAPrivateKey importedKey = RSAUtils.importPrivateKeyFromPEM(pemString);
         Assert.assertNotNull("导入的私钥不应为空", importedKey);
 
-        // 验证导入的密钥可以正常使用
+        // 验证导入的密钥可以正常使用（直接使用原始私钥字符串）
         String encrypted = RSAUtils.encryptByPublicKey(testData, publicKeyBase64);
-        String decrypted = RSAUtils.decryptByPrivateKey(encrypted, Base64.encodeBase64String(importedKey.getEncoded()));
+        String decrypted = RSAUtils.decryptByPrivateKey(encrypted, privateKeyBase64);
         Assert.assertEquals("加解密后应该与原文一致", testData, decrypted);
+
+        // 验证导入的密钥与原始密钥的编码一致
+        Assert.assertArrayEquals("导入的私钥编码应该与原始私钥编码一致",
+            Base64.decodeBase64(privateKeyBase64), importedKey.getEncoded());
 
         System.out.println("原文: " + testData);
         System.out.println("解密: " + decrypted);
@@ -441,7 +459,7 @@ public class RSATest {
         byte[] plaintext = "Hello RSA PKCS#1 v1.5 Bytes!".getBytes();
 
         // 字节数组加解密
-        byte[] encrypted = RSAUtils.encryptByPublicKeyPKCS1V15(plaintext, publicKeyBase64.getBytes());
+        byte[] encrypted = RSAUtils.encryptByPublicKeyPKCS1V15(plaintext, Base64.decodeBase64(publicKeyBase64));
         byte[] decrypted = RSAUtils.decryptByPrivateKeyPKCS1V15(encrypted, privateKeyBase64);
 
         Assert.assertArrayEquals("PKCS#1 v1.5 字节数组解密后应该与原文一致", plaintext, decrypted);
@@ -518,7 +536,7 @@ public class RSATest {
         byte[] plaintext = "Hello RSA Bytes!".getBytes();
 
         // 字节数组加解密（默认方法使用 OAEP SHA-256）
-        byte[] encrypted = RSAUtils.encryptByPublicKey(plaintext, publicKeyBase64.getBytes());
+        byte[] encrypted = RSAUtils.encryptByPublicKey(plaintext, Base64.decodeBase64(publicKeyBase64));
         byte[] decrypted = RSAUtils.decryptByPrivateKey(encrypted, privateKeyBase64);
 
         Assert.assertArrayEquals("字节数组解密后应该与原文一致", plaintext, decrypted);
@@ -573,7 +591,7 @@ public class RSATest {
 
         // 字节数组加解密
         byte[] plaintextBytes = plaintext.getBytes();
-        byte[] encryptedBytes = RSAUtils.encryptByPublicKeyOAEPSHA256(plaintextBytes, publicKeyBase64.getBytes());
+        byte[] encryptedBytes = RSAUtils.encryptByPublicKeyOAEPSHA256(plaintextBytes, Base64.decodeBase64(publicKeyBase64));
         byte[] decryptedBytes = RSAUtils.decryptByPrivateKeyOAEPSHA256(encryptedBytes, privateKeyBase64);
         Assert.assertArrayEquals("字节数组 OAEP SHA-256 解密后应该与原文一致", plaintextBytes, decryptedBytes);
 
@@ -600,7 +618,7 @@ public class RSATest {
 
         // 字节数组加解密
         byte[] plaintextBytes = plaintext.getBytes();
-        byte[] encryptedBytes = RSAUtils.encryptByPublicKeyOAEPSHA384(plaintextBytes, publicKeyBase64.getBytes());
+        byte[] encryptedBytes = RSAUtils.encryptByPublicKeyOAEPSHA384(plaintextBytes, Base64.decodeBase64(publicKeyBase64));
         byte[] decryptedBytes = RSAUtils.decryptByPrivateKeyOAEPSHA384(encryptedBytes, privateKeyBase64);
         Assert.assertArrayEquals("字节数组 OAEP SHA-384 解密后应该与原文一致", plaintextBytes, decryptedBytes);
 
@@ -627,7 +645,7 @@ public class RSATest {
 
         // 字节数组加解密
         byte[] plaintextBytes = plaintext.getBytes();
-        byte[] encryptedBytes = RSAUtils.encryptByPublicKeyOAEPSHA512(plaintextBytes, publicKeyBase64.getBytes());
+        byte[] encryptedBytes = RSAUtils.encryptByPublicKeyOAEPSHA512(plaintextBytes, Base64.decodeBase64(publicKeyBase64));
         byte[] decryptedBytes = RSAUtils.decryptByPrivateKeyOAEPSHA512(encryptedBytes, privateKeyBase64);
         Assert.assertArrayEquals("字节数组 OAEP SHA-512 解密后应该与原文一致", plaintextBytes, decryptedBytes);
 

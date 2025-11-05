@@ -6,7 +6,6 @@ import com.lzc.lib.util.cipher.constant.Padding;
 import com.lzc.lib.util.cipher.exception.CipherException;
 import com.lzc.lib.util.cipher.utils.RandomUtil;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
@@ -98,7 +97,7 @@ public class SM4Utils {
      * @return 密文（Base64编码）
      */
     public static String encrypt(String data, String key, String iv, Mode mode, Padding padding) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         byte[] encrypt = encrypt(data.getBytes(), key.getBytes(), iv, mode, padding);
@@ -122,7 +121,7 @@ public class SM4Utils {
             // 创建密码器
             Cipher cipher = Cipher.getInstance(algorithm);
             // 初始化
-            if (StringUtils.isNotEmpty(iv)) {
+            if (iv != null && !iv.isEmpty()) {
                 AlgorithmParameters parameters = AlgorithmParameters.getInstance(Algorithm.SM4.getAlgorithm());
                 // IV 使用 Base64 解码，保证跨语言兼容性
                 parameters.init(new IvParameterSpec(Base64.decodeBase64(iv)));
@@ -193,7 +192,7 @@ public class SM4Utils {
      * @return 明文
      */
     public static String decrypt(String data, String key, String iv, Mode mode, Padding padding) {
-        if (StringUtils.isEmpty(data)) {
+        if (data == null || data.isEmpty()) {
             return null;
         }
         byte[] decrypt = decrypt(Base64.decodeBase64(data), key.getBytes(), iv, mode, padding);
@@ -217,7 +216,7 @@ public class SM4Utils {
             // 创建密码器
             Cipher cipher = Cipher.getInstance(algorithm);
             // 初始化
-            if (StringUtils.isNotEmpty(iv)) {
+            if (iv != null && !iv.isEmpty()) {
                 AlgorithmParameters parameters = AlgorithmParameters.getInstance(Algorithm.SM4.getAlgorithm());
                 // IV 使用 Base64 解码，保证跨语言兼容性
                 parameters.init(new IvParameterSpec(Base64.decodeBase64(iv)));
@@ -254,7 +253,7 @@ public class SM4Utils {
     private static void check(byte[] data, byte[] key, String iv, Mode mode, Padding padding) {
         checkKey(key);
         checkModeAndPadding(data, mode, padding);
-        if (StringUtils.isNotEmpty(iv)) {
+        if (iv != null && !iv.isEmpty()) {
             checkIv(iv);
             if (mode == Mode.ECB) {
                 throw new CipherException("SM4 ECB mode does not use an IV");
@@ -584,7 +583,7 @@ public class SM4Utils {
         if (data == null) {
             return null;
         }
-        byte[] aadBytes = StringUtils.isEmpty(aad) ? null : aad.getBytes(StandardCharsets.UTF_8);
+        byte[] aadBytes = (aad == null || aad.isEmpty()) ? null : aad.getBytes(StandardCharsets.UTF_8);
         byte[] encrypt = encryptGCM(data.getBytes(StandardCharsets.UTF_8), key.getBytes(StandardCharsets.UTF_8), iv, aadBytes);
         return Base64.encodeBase64String(encrypt);
     }
@@ -654,7 +653,7 @@ public class SM4Utils {
         if (data == null) {
             return null;
         }
-        byte[] aadBytes = StringUtils.isEmpty(aad) ? null : aad.getBytes(StandardCharsets.UTF_8);
+        byte[] aadBytes = (aad == null || aad.isEmpty()) ? null : aad.getBytes(StandardCharsets.UTF_8);
         byte[] decrypt = decryptGCM(Base64.decodeBase64(data), key.getBytes(StandardCharsets.UTF_8), iv, aadBytes);
         return new String(decrypt, StandardCharsets.UTF_8);
     }
@@ -743,7 +742,7 @@ public class SM4Utils {
      * 校验 SM4 初始化向量（GCM 模式），推荐12字节（Base64 编码）
      */
     private static void checkIvGCM(String iv) {
-        if (StringUtils.isEmpty(iv)) {
+        if (iv == null || iv.isEmpty()) {
             throw new CipherException("SM4 IV cannot be empty");
         }
         // 解码 Base64，检查实际字节长度
