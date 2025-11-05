@@ -23,16 +23,16 @@
 ## Maven依赖
 ```xml
 <dependency>
-    <groupId>com.github.duanxinyuan</groupId>
+    <groupId>com.github.lzcook</groupId>
     <artifactId>util-cipher</artifactId>
-    <version>1.2.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
 ## 快速开始
 
 ### 非对称加密
-* **RSAUtils** - 国际非对称加密标准
+* **RSAUtils** -  国际非对称加密标准
 * **SM2Utils** - 国密椭圆曲线公钥密码算法
 
 ### 对称加密
@@ -428,6 +428,3 @@ String hmac = HmacUtils.hmacSHA256("Hello World", new String(key));
 
 ---
 
-## 📄 许可证
-
-本项目采用 [Apache License 2.0](LICENSE) 许可证。
