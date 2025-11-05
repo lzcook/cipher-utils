@@ -1,8 +1,8 @@
-import com.dxy.library.util.cipher.hash.SHAUtils;
+import com.lzc.lib.util.cipher.hash.SHAUtils;
 import org.junit.Test;
 
 /**
- * @author duanxinyuan
+ * @author lzc
  * 2019/2/26 22:54
  */
 public class SHATest {

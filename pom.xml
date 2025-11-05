@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.duanxinyuan</groupId>
+    <groupId>com.github.lzcook</groupId>
     <artifactId>util-cipher</artifactId>
     <version>${cipher-utils.version}</version>
     <packaging>jar</packaging>
@@ -48,9 +48,7 @@
     </developers>
 
     <properties>
-        <cipher-utils.version>1.2.1</cipher-utils.version>
-        <exception-formative.version>1.1.0</exception-formative.version>
-
+        <cipher-utils.version>1.0.0</cipher-utils.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -112,10 +110,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.duanxinyuan</groupId>
-            <artifactId>exception-formative</artifactId>
-        </dependency>
-        <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
@@ -135,14 +129,6 @@
 
     <dependencyManagement>
         <dependencies>
-
-            <!--支持类似Log4j输入的自定义Exception库-->
-            <dependency>
-                <groupId>com.github.duanxinyuan</groupId>
-                <artifactId>exception-formative</artifactId>
-                <version>${exception-formative.version}</version>
-            </dependency>
-
 
             <!--Apache，覆盖spring-boot-dependencies中的版本-->
             <dependency>

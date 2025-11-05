@@ -1,8 +1,8 @@
-import com.dxy.library.util.cipher.hash.MD5Utils;
+import com.lzc.lib.util.cipher.hash.MD5Utils;
 import org.junit.Test;
 
 /**
- * @author duanxinyuan
+ * @author lzc
  * 2019/2/26 23:14
  */
 public class MD5Test {

@@ -1,9 +1,9 @@
-import com.dxy.library.util.cipher.constant.HmacType;
-import com.dxy.library.util.cipher.hash.HmacUtils;
+import com.lzc.lib.util.cipher.constant.HmacType;
+import com.lzc.lib.util.cipher.hash.HmacUtils;
 import org.junit.Test;
 
 /**
- * @author duanxinyuan
+ * @author lzc
  * 2019/2/26 23:01
  */
 public class HmacTest {
