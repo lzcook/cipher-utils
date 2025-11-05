@@ -25,68 +25,10 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 /**
- * RSA工具类
- * 最典型的非对称加密算法，1978由Ron Rivest, AdiShamir 和Leonard Adleman三人发明
- * 公钥与私钥。支持数字签名，能用签名对传输过来的数据进行校验
- * 默认公钥X509格式，私钥PKCS8格式
- * RSA密文采用Base64方式编码
- *
- * 功能包括：
- * - 签名、验签
- * - 公钥加密、私钥解密
- * - 私钥加密、公钥解密
- * - 密钥导出导入（支持DER和PEM格式）
- * - 密钥文件读写
- *
- * <h2>默认方法说明</h2>
- * <p>默认的 encrypt/decrypt 方法（无显式指定填充方式）使用 <b>OAEPWithSHA-256AndMGF1Padding</b>，
- * 这是符合 NIST 推荐的现代加密标准，提供最佳的安全性和兼容性平衡。</p>
- *
- * <h2>安全最佳实践</h2>
- * <ul>
- * <li><b>推荐使用 OAEP 填充</b>：提供概率加密，抗选择密文攻击（CCA），符合现代安全标准</li>
- * <li><b>避免使用 PKCS1 填充</b>：存在已知安全漏洞（如 Bleichenbacher 攻击），仅用于兼容旧系统</li>
- * <li><b>禁止使用 NoPadding</b>：完全不安全，除非实现自定义填充方案</li>
- * <li><b>密钥长度建议</b>：至少 2048 位，推荐 3072 位或 4096 位</li>
- * </ul>
- *
- * <h2>填充方式说明</h2>
- * <ul>
- * <li><b>OAEPWithSHA-256（强烈推荐）</b>：
- *     <ul>
- *     <li>优点：概率加密、抗CCA攻击、SHA-256安全哈希、符合现代标准（NIST推荐）</li>
- *     <li>适用：所有新项目的首选方案</li>
- *     <li>可加密数据：2048位密钥约190字节</li>
- *     </ul>
- * </li>
- * <li><b>OAEPPadding（基础推荐）</b>：
- *     <ul>
- *     <li>优点：概率加密、抗CCA攻击</li>
- *     <li>缺点：默认使用SHA-1（已被淘汰）</li>
- *     <li>适用：需要兼容旧系统的OAEP实现</li>
- *     </ul>
- * </li>
- * <li><b>OAEPWithSHA-384/512（高安全）</b>：
- *     <ul>
- *     <li>优点：更强的安全性</li>
- *     <li>适用：金融、军事、政府等高安全场景</li>
- *     <li>缺点：性能稍低、可加密数据稍小</li>
- *     </ul>
- * </li>
- * <li><b>PKCS1Padding（传统，已弃用）</b>：
- *     <ul>
- *     <li>优点：兼容性好、可加密数据稍大（2048位密钥约245字节）</li>
- *     <li>缺点：存在安全漏洞（Bleichenbacher攻击）、不是概率加密、已被淘汰</li>
- *     <li>适用：仅用于兼容旧系统</li>
- *     </ul>
- * </li>
- * </ul>
- *
- * <h2>关于 ECB 模式说明</h2>
- * <p>注意：RSA 中的 "ECB" 不是真正的 ECB 分块模式，只是 Java API 的命名约定。
- * RSA 本质上只加密单个数据块，不存在像 AES-ECB 那样的安全问题。
- * For compatibility, if algorithm string is "RSA" then it is mapped to "RSA/ECB/PKCS1Padding".
- * RSA/ECB/XXXPadding 和 RSA/NONE/XXXPadding 实际上是等价的。</p>
+ * RSA非对称加密工具类
+ * 支持签名/验签、加密/解密、密钥导出导入（DER/PEM格式）
+ * 默认使用OAEPWithSHA-256AndMGF1Padding填充方式
+ * 详细算法说明和安全最佳实践请参考 README.md
  *
  * @author lzc
  */

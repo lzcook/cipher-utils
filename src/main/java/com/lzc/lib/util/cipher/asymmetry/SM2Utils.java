@@ -20,21 +20,10 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 /**
- * SM2工具类
- * SM2椭圆曲线公钥密码算法，是由国家密码管理局于2010年12月17日发布，一种商用密码分组标准对称算法，
- * 国家密码管理部门已经决定采用SM2椭圆曲线算法替换RSA算法
- * 是ECC（Elliptic Curve Cryptosystem）算法的一种，基于椭圆曲线离散对数问题，
- * 计算复杂度是指数级，求解难度较大，同等安全程度要求下，椭圆曲线密码较其他公钥所需密钥长度小很多
- * 密钥长256位，安全强度比RSA 2048位高，但运算速度快于RSA
- * 默认公钥X509格式，私钥PKCS8格式，OpenSSL的d2i_ECPrivateKey函数要求私钥是SEC1标准
- * SM2密文采用ASN.1/DER方式编码
- *
- * 功能包括：
- * - 签名、验签
- * - 密钥交换
- * - 公钥加密、私钥解密
- * - 密钥导出导入（支持DER和PEM格式）
- * - 密钥文件读写
+ * SM2非对称加密工具类（国密椭圆曲线算法）
+ * 支持签名/验签、加密/解密、密钥导出导入（DER/PEM格式）
+ * 密钥长度256位，安全强度优于RSA 2048位
+ * 详细算法说明和技术特点请参考 README.md
  *
  * @author lzc
  */

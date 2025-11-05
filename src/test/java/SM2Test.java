@@ -52,7 +52,10 @@ public class SM2Test {
     @Test
     public void test() {
         SM2KeyPair sm2KeyPair = SM2Utils.generateKey();
-
+        System.out.println("私钥:" + ByteUtils.toHexString(sm2KeyPair.getEcPrivateKey().getS().toByteArray()).toUpperCase());
+        System.out.println("公钥点X坐标:" + sm2KeyPair.getEcPublicKey().getW().getAffineX());
+        System.out.println("公钥点Y坐标:" + sm2KeyPair.getEcPublicKey().getW().getAffineY());
+        System.out.println("公钥点:" + ByteUtils.toHexString(sm2KeyPair.getEcPublicKey().getEncoded()).toUpperCase());
         //加密
         String encryptedData = SM2Utils.encrypt(content, sm2KeyPair.getEcPublicKey());
         System.out.println(encryptedData);

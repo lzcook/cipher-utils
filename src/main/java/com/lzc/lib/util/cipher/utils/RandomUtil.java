@@ -7,7 +7,8 @@ import java.util.Base64;
 
 /**
  * 随机数生成工具类
- * 提供密码学安全的随机数生成功能，用于生成密钥、IV、盐值等
+ * 使用SecureRandom提供密码学安全的随机数生成
+ * 使用ThreadLocal确保线程安全，详细技术说明请参考 README.md
  *
  * @author lzc
  * 2025/11/03

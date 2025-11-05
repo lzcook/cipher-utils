@@ -108,6 +108,8 @@ public class AESTest {
         System.out.println("=== 测试 AES-CTR 模式（16字节密钥）===");
 
         // 测试字符串加解密
+        //https://gchq.github.io/CyberChef/#recipe=AES_Encrypt(%7B'option':'UTF8','string':'1234567890123456'%7D,%7B'option':'Base64','string':'AQIDBAUGBwgJCgsMDQ4PEA%3D%3D'%7D,'CTR','Raw','Raw',%7B'option':'Hex','string':''%7D)To_Base64('A-Za-z0-9%2B/%3D')&input=SGVsbG8sIEFFUy1DVFIgYW5kIEFFUy1HQ00gZW5jcnlwdGlvbiE
+//        String encrypted = "+sI0KDgfhArMaQfz5K1jKUjUDtT0IWyo6IzLuTFmdWgozgItGCE=";
         String encrypted = AESUtils.encryptCTR(ctrGcmContent, key16, iv16);
         System.out.println("原文: " + ctrGcmContent);
         System.out.println("密文: " + encrypted);
@@ -547,6 +549,8 @@ public class AESTest {
         System.out.println("=== 测试 AES-CBC 模式 ===");
 
         // 测试字符串加解密
+        //https://gchq.github.io/CyberChef/#recipe=AES_Encrypt(%7B'option':'UTF8','string':'1234567890123456'%7D,%7B'option':'Base64','string':'AQIDBAUGBwgJCgsMDQ4PEA%3D%3D'%7D,'CBC','Raw','Raw',%7B'option':'Hex','string':''%7D)To_Base64('A-Za-z0-9%2B/%3D')&input=SGVsbG8sIEFFUy1DVFIgYW5kIEFFUy1HQ00gZW5jcnlwdGlvbiE
+//        String encrypted = "NVAMZSDiJybayG2jWltk7UVVCmrNLggWB6SPpyWgTNcvXX+xeU4M0MJVEE4/F2b9";
         String encrypted = AESUtils.encryptCBC(ctrGcmContent, key16, iv16);
         System.out.println("原文: " + ctrGcmContent);
         System.out.println("密文: " + encrypted);
@@ -572,6 +576,8 @@ public class AESTest {
         System.out.println("=== 测试 AES-ECB 模式（已废弃，仅兼容性测试）===");
 
         // 测试字符串加解密
+        //https://gchq.github.io/CyberChef/#recipe=AES_Encrypt(%7B'option':'UTF8','string':'1234567890123456'%7D,%7B'option':'Base64','string':'AQIDBAUGBwgJCgsMDQ4PEA%3D%3D'%7D,'ECB','Raw','Raw',%7B'option':'Hex','string':''%7D)To_Base64('A-Za-z0-9%2B/%3D')&input=SGVsbG8sIEFFUy1DVFIgYW5kIEFFUy1HQ00gZW5jcnlwdGlvbiE
+//        String encrypted = "WtXRPqLqmub3ARwQgE4dbMrTuSZQSyZ7SKu51K2mKiiaMAuKlokqQPIeWWa/KwXq";
         String encrypted = AESUtils.encryptECB(ctrGcmContent, key16);
         System.out.println("原文: " + ctrGcmContent);
         System.out.println("密文: " + encrypted);

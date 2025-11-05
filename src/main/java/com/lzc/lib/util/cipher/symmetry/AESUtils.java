@@ -21,43 +21,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 
 /**
- * AES工具类
- * 高级加密标准(Advanced Encryption Standard)，密钥长可以选 128, 192, 256，块长128，用来替代原先的DES，速度快，安全
- * 优点：AES具有比DES更好的安全性、效率、灵活性，在软件及硬件上都能快速地加解密，相对来说较易于实作，且只需要很少的存储器。
- *
- * <h2>功能包括</h2>
- * <ul>
- * <li><b>便捷加密</b>：{@code encrypt(data, key, iv)} 使用推荐的 CBC 模式，简单易用</li>
- * <li><b>GCM 模式</b>（强烈推荐）：认证加密，提供数据完整性和机密性保障</li>
- * <li><b>CBC 模式</b>（推荐）：传统块加密模式，平衡性能和安全，需要随机 IV</li>
- * <li><b>CTR 模式</b>（推荐）：流式加密模式，不需要填充</li>
- * <li><b>ECB 模式</b>（已弃用）：仅用于兼容旧系统，不安全</li>
- * <li><b>密钥和 IV 生成</b>：提供密码学安全的随机密钥和 IV 生成工具</li>
- * </ul>
- *
- * <h2>安全提示</h2>
- * <ul>
- * <li><b>推荐顺序</b>：GCM > CTR > CBC > CFB/OFB > ECB</li>
- * <li><b>禁止使用 ECB 模式</b>：相同明文产生相同密文，仅用于兼容旧系统</li>
- * <li><b>必须使用随机 IV</b>：每次加密使用不同的 IV</li>
- * <li><b>GCM 模式</b>：提供认证加密，防止篡改</li>
- * </ul>
- *
- * <h2>跨语言兼容性</h2>
- * <ul>
- * <li>Java 的 PKCS5Padding 等同于 PKCS7Padding（对于 16 字节块）</li>
- * <li>其他语言通常使用 PKCS7Padding 命名</li>
- * <li>CTR 和 GCM 模式使用 NoPadding</li>
- * </ul>
- *
- * <h2>方法命名规范</h2>
- * <ul>
- * <li>{@code encrypt(data, key, iv)} / {@code decrypt(data, key, iv)} - 便捷方法，默认使用推荐的 CBC 模式</li>
- * <li>{@code encryptGCM} / {@code decryptGCM} - GCM 模式（强烈推荐，最高安全性）</li>
- * <li>{@code encryptCBC} / {@code decryptCBC} - CBC 模式（推荐，平衡性能和安全）</li>
- * <li>{@code encryptCTR} / {@code decryptCTR} - CTR 模式（推荐，流式加密）</li>
- * <li>{@code encryptECB} / {@code decryptECB} - ECB 模式（已弃用，仅用于兼容旧系统）</li>
- * </ul>
+ * AES对称加密工具类（高级加密标准）
+ * 支持多种加密模式：GCM（推荐）、CBC、CTR、ECB（已弃用）
+ * 默认使用CBC模式，密钥长度支持128/192/256位
+ * 详细使用说明和安全建议请参考 README.md
  *
  * @author lzc
  */

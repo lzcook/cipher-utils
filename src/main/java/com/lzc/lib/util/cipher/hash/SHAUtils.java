@@ -7,9 +7,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * SHA工具类
- * Secure Hash Algorithm（Secure Hash Algorithm）
- * SHA-224虽仍安全，但抗碰撞能力不及SHA-256，且优先推荐使用SHA-256及以上长度进行加密摘要。
+ * SHA散列算法工具类（Secure Hash Algorithm）
+ * 支持SHA-1/224/256/384/512及SHA3系列算法
+ * 推荐使用SHA-256及以上长度，详细安全建议请参考 README.md
+ *
  * @author lzc
  */
 public class SHAUtils {
