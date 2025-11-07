@@ -519,6 +519,8 @@ public class SM4Test {
         System.out.println("=== 测试 SM4-CBC 模式 ===");
 
         // 测试字符串加解密
+        //https://gchq.github.io/CyberChef/#recipe=SM4_Encrypt(%7B'option':'UTF8','string':'1234567890123456'%7D,%7B'option':'Base64','string':'AQIDBAUGBwgJCgsMDQ4PEA%3D%3D'%7D,'CBC','Raw','Raw')To_Base64('A-Za-z0-9%2B/%3D')&input=SGVsbG8sIFNNNC1DVFIgYW5kIFNNNC1HQ00gZW5jcnlwdGlvbiE
+//        String encrypted = "kyU2/TrZJ+C0EEqtNQb7j1lIMASlsKCYe8eKD7IkoYq4uAwvY1zL3qMN7XISPKBj";
         String encrypted = SM4Utils.encryptCBC(ctrGcmContent, key16, iv16);
         System.out.println("原文: " + ctrGcmContent);
         System.out.println("密文: " + encrypted);
